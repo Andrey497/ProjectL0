@@ -1,0 +1,59 @@
+create table payment(
+id_payment SERIAL PRIMARY KEY,
+transaction varchar(30),
+request_id varchar(30),
+currensy varchar(11),
+provider varchar(30),
+amount int,
+payment_dt int, 
+bank varchar(30),
+delivery_cost int,
+goods_total int,
+custom_fee int);
+
+create table delivery(
+id_delivery SERIAL PRIMARY KEY,
+name varchar(30),
+phone varchar(11),
+zip varchar(11),
+city varchar(30),
+address varchar(30),
+region varchar(30),
+email varchar(30));
+
+create table item(
+chrt_id int PRIMARY KEY,
+track_numcreate varchar(30),
+price int,
+rid varchar(30),
+name varchar(30),
+sale int,
+size varchar(30),
+total_price int,
+nm_id int,
+brand varchar(30),
+status int);
+
+create table orders(
+order_uid varchar(30) primary key,
+track_number varchar(30),
+entry varchar(30),
+delivery_id int REFERENCES delivery(id_delivery),
+payment_id int  REFERENCES payment(id_payment),
+locale varchar(11),
+nternal_signature varchar (30),
+customer_id varchar(30),
+delivery_service varchar(30),
+shardkey varchar(30),
+sm_id int,
+date_created varchar(30),
+oof_shard varchar(30)
+);
+
+
+
+create table item_order(
+id_item_order SERIAL PRIMARY KEY,
+item_Id int REFERENCES item(chrt_id),
+order_id varchar(30)  REFERENCES orders(order_uid)
+);
